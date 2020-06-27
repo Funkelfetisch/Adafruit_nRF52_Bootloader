@@ -28,15 +28,25 @@
 
 #define _PINNUM(port, pin)    ((port)*32 + (pin))
 
+#define _POW_EN _PINNUM(1, 3)
+#define _PWM_EL _PINNUM(0, 0)
+#define _JACK1_SW _PINNUM(1, 10)
+#define _JACK2_SW _PINNUM(0, 29)
+#define _JACK3_SW _PINNUM(1, 15)
+#define _JACK4_SW _PINNUM(1, 13)
+#define _JACK5_SW _PINNUM(1, 12)
+
 /*------------------------------------------------------------------*/
 /* LED
  *------------------------------------------------------------------*/
 #define LEDS_NUMBER           2
 #define LED_PRIMARY_PIN       _PINNUM(0, 24)
 #define LED_SECONDARY_PIN     _PINNUM(0, 25)
-#define LED_NEOPIXEL          _PINNUM(1, 9)
-#define BOARD_RGB_BRIGHTNESS  0x040404
 #define LED_STATE_ON          1
+
+#define LED_NEOPIXEL          _PINNUM(1, 9)
+#define NEOPIXELS_NUMBER      7
+#define BOARD_RGB_BRIGHTNESS  0x040404
 
 /*------------------------------------------------------------------*/
 /* BUTTON
@@ -46,16 +56,9 @@
 #define BUTTON_2              _PINNUM(0, 23)
 #define BUTTON_PULL           NRF_GPIO_PIN_PULLUP
 
-/*------------------------------------------------------------------*/
-/* UART
- *------------------------------------------------------------------*/
-#define RX_PIN_NUMBER         8
-#define TX_PIN_NUMBER         6
-#define CTS_PIN_NUMBER        0
-#define RTS_PIN_NUMBER        0
-#define HWFC                  false
-
-// Used as model string in OTA mode
+//--------------------------------------------------------------------+
+// BLE OTA
+//--------------------------------------------------------------------+
 #define BLEDIS_MANUFACTURER   "Funkelfetisch"
 #define BLEDIS_MODEL          "NEBULITE Smart"
 
@@ -71,5 +74,14 @@
 #define UF2_VOLUME_LABEL   "NEBULITE_BL"
 #define UF2_BOARD_ID       "NEBULITE-Smart-rev0"
 #define UF2_INDEX_URL      "https://nebulitecollection.com"
+
+/*------------------------------------------------------------------*/
+/* UART
+ *------------------------------------------------------------------*/
+#define RX_PIN_NUMBER         8
+#define TX_PIN_NUMBER         6
+#define CTS_PIN_NUMBER        0
+#define RTS_PIN_NUMBER        0
+#define HWFC                  false
 
 #endif // _FEATHER_NRF52840_H

@@ -156,6 +156,28 @@ int main(void)
 {
   PRINTF("Bootlaoder Start\r\n");
 
+  // turn on power
+  nrf_gpio_cfg_output(_POW_EN);
+  nrf_gpio_pin_write(_POW_EN, 1);
+
+  // turn off el-wire (inverted!)
+  nrf_gpio_cfg_output(_PWM_EL);
+  nrf_gpio_pin_write(_PWM_EL, 1);
+
+  NRFX_DELAY_MS(40);
+
+  nrf_gpio_cfg_input(_JACK1_SW, NRF_GPIO_PIN_NOPULL);
+  nrf_gpio_cfg_input(_JACK3_SW, NRF_GPIO_PIN_NOPULL);
+  nrf_gpio_cfg_input(_JACK4_SW, NRF_GPIO_PIN_NOPULL);
+  nrf_gpio_cfg_input(_JACK5_SW, NRF_GPIO_PIN_NOPULL);
+  nrf_gpio_pin_write(_PWM_EL, 1);
+
+bool somethingAttached = (nrf_gpio_pin_read(_JACK1_SW) ||
+!nrf_gpio_pin_read(_JACK3_SW) ||
+!nrf_gpio_pin_read(_JACK4_SW) ||
+!nrf_gpio_pin_read(_JACK5_SW));
+
+
   // Populate Boot Address and MBR Param into MBR if not already
   // MBR_BOOTLOADER_ADDR/MBR_PARAM_PAGE_ADDR are used if available, else UICR registers are used
   // Note: skip it for now since this will prevent us to change the size of bootloader in the future
@@ -201,8 +223,12 @@ int main(void)
   // DFU button pressed
   dfu_start  = dfu_start || button_pressed(BUTTON_DFU);
 
+  // this seems necessary, NO idea why
+  NRFX_DELAY_MS(40);
+
   // DFU + FRESET are pressed --> OTA
   _ota_dfu = _ota_dfu  || ( button_pressed(BUTTON_DFU) && button_pressed(BUTTON_FRESET) ) ;
+  _ota_dfu = _ota_dfu || somethingAttached;
 
   bool const valid_app = bootloader_app_is_valid();
   bool const just_start_app = valid_app && !dfu_start && (*dbl_reset_mem) == DFU_DBL_RESET_APP;
