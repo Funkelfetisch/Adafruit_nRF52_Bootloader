@@ -177,6 +177,12 @@ bool somethingAttached = (nrf_gpio_pin_read(_JACK1_SW) ||
 !nrf_gpio_pin_read(_JACK4_SW) ||
 !nrf_gpio_pin_read(_JACK5_SW));
 
+// enable powerbank load
+  nrf_gpio_cfg_output(_PB_LOAD);
+  nrf_gpio_pin_write(_PB_LOAD, 1);
+
+
+
 
   // Populate Boot Address and MBR Param into MBR if not already
   // MBR_BOOTLOADER_ADDR/MBR_PARAM_PAGE_ADDR are used if available, else UICR registers are used

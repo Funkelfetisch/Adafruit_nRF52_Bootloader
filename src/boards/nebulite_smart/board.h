@@ -36,6 +36,8 @@
 #define _JACK4_SW _PINNUM(1, 13)
 #define _JACK5_SW _PINNUM(1, 12)
 
+#define _PB_LOAD _PINNUM(0, 21)
+
 /*------------------------------------------------------------------*/
 /* LED
  *------------------------------------------------------------------*/
@@ -46,7 +48,7 @@
 
 #define LED_NEOPIXEL          _PINNUM(1, 9)
 #define NEOPIXELS_NUMBER      7
-#define BOARD_RGB_BRIGHTNESS  0x040404
+#define BOARD_RGB_BRIGHTNESS  0xffffff
 
 /*------------------------------------------------------------------*/
 /* BUTTON
