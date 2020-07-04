@@ -10,8 +10,8 @@
 
 #define NRFX_PRS_ENABLED    0
 
-#define NRFX_PWM_ENABLED    0
-#define NRFX_PWM0_ENABLED   0
+#define NRFX_PWM_ENABLED    1
+#define NRFX_PWM0_ENABLED   1
 #define NRFX_PWM1_ENABLED   0
 #define NRFX_PWM2_ENABLED   0
 #define NRFX_PWM3_ENABLED   0
